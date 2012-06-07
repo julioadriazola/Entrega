@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<h2>Busque información sobre los próximos recorridos</h2>
+<fieldset>
+        @using (Html.BeginForm("Restults", "Search"))
+        {
+            @Html.TextBox("query")
+            <input type="submit" value="Buscar" />
+        }
+</fieldset>
+
+<i>Nota:<br />Puede ingresar los siguientes valores:</i>
+<ul>
+<li>PARADERO RECORRIDO </li> <i>ej: P100 428</i>
+<li>PARADERO</li> <i>ej: P100</i>
+<li>RECORRIDO</li> <i>ej: 428</i>
+</ul>

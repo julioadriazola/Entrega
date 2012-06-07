@@ -1,0 +1,9 @@
+﻿@if(Request.IsAuthenticated) {
+    <text>Welcome <strong>@User.Identity.Name</strong>!
+    [ @Html.ActionLink("Salir", "logout", "Account") ]</text>
+}
+else {
+    @Html.ActionLink("Ingresar con Twitter", "Authorize", "Account");
+    @:[ @Html.ActionLink("Login", "login", "Account") ] 
+    @Html.ActionLink("Registrarse", "register", "Account")
+    }

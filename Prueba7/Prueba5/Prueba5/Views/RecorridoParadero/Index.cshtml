@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Prueba5.Models.RecorridosParadero>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Listado de RecorridosParadero</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            Paradero
+        </th>
+        <th>
+            Recorrido
+        </th>
+        <th>
+            NumroParada
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Paradero.codigo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Recorrido.numero)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroParada)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

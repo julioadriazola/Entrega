@@ -1,0 +1,42 @@
+﻿@model Prueba5.Models.IngresarInformacion
+
+@{
+    ViewBag.Title = "Ingresar Información";
+}
+
+<h2>Ingreso de Información!</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm("CrearInfo","IngresarInformacion")) {
+    @Html.ValidationSummary(true, "No se pudo ingresar la información")
+    <fieldset>
+        <legend>IngresarInformacion</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ParaderoRecorrido,"Vuélvase un TranSapo reportando!")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ParaderoRecorrido)
+            @Html.ValidationMessageFor(model => model.ParaderoRecorrido)
+        </div>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+        </fieldset><font face="arial" size=3>
+        <p> <b>Formato:</b>"<font color=red>@@PARADERO</font> <font color=blue>@@RECORRIDO</font> <font color=green>@@ESTADO</font>" Ej: PF103 f09 pr</p>
+        <p> <b><font color=red>@@PARADERO*</font>:</b>Código del Paradero desde el cual se reporta</p>
+        <p> <b><font color=blue>@@RECORRIDO*</font>:</b>Recorrido del Bus del cual reportas</p>
+        <p> <b><font color=green>@@ESTADO</font>:</b>Estado del bus del cual reportas, pueden ser:</p>
+        <br> PA: El bus se quedó en Panne ¬¬
+        <br> LL: El bus está lleno y la gente parece sardina
+        <br> D: El bus está detenido y el chofer va más lento que inyección de Ulpo
+        <br> PR: Problemas de otro tipo
+        <br> V: Haleluyah! El bus no va colapsado y va a una velocidad prudente
+        </font>
+        <p></p>
+        <p> *: Campos obligatorios. Respeta los espacios</p>
+        
+    
+}

@@ -1,0 +1,135 @@
+﻿@model Prueba5.Models.IngresarInformacion
+
+@{
+    ViewBag.Title = "Results";
+}
+
+<h2>Resultados</h2>
+@if (Model.ResultadoBusqueda != null)
+{
+    <p>Información de búsqueda para:<br /> Paradero:<b>@Model.ParaderoIngresado.codigo </b><br /> Recorrido:<b>@Model.RecorridoIngresado.numero </b></p>
+    <table>
+        <tr>
+            <th>
+                Recorrido
+            </th>
+            <th>
+                Lo que está pasando...
+            </th>
+            <th>
+                Estado
+            </th>
+            <th>
+                Fecha
+            </th>
+        </tr>
+        @foreach (var q in Model.ResultadoBusqueda)
+        {
+            <tr>
+                <td>@q.Recorrido</td>
+                @if (q.Lejania == -1)
+                    {
+                        <td>Un Paradero Adelante</td>
+                    }
+                    else if (q.Lejania < -1)
+                    {
+                        <td>@(-q.Lejania) Paraderos Adelante</td>
+                    }
+                else if (q.Lejania == 0)
+                {
+                    <td>En tu Paradero</td>
+                }
+                else if (q.Lejania == 1)
+                {
+                    <td>Un Paradero Antes</td>
+                }
+                else
+                {
+                    <td>@q.Lejania Paraderos Antes</td>
+                }
+                <td>@q.NombreEstado</td>
+                <td>@q.Fecha</td>
+            </tr>
+        }
+    </table>
+}
+else if (Model.Paraderos != null)
+{
+    @Html.ValidationSummary(true, "Hubo errores en la búsqueda")
+    <p>Lista ordenada de los paraderos por los que transita el recorrido  <b>@Model.RecorridoIngresado.numero</b></p>
+    <fieldset>
+    <table>
+    <tr><th>Listado de Paraderos</th></tr>
+    @foreach (var m in Model.Paraderos)
+    { 
+        <tr><td>@Html.ActionLink(m.codigo, Model.RecorridoIngresado.numero + " " + m.codigo, "Busqueda")</td></tr>
+    }
+    </table>
+    </fieldset>
+}
+else if (Model.Recorridos != null)
+{
+    @Html.ValidationSummary(true, "Hubo errores en la búsqueda")
+    <p>Recorridos que pasan por <b>@Model.ParaderoIngresado.codigo</b></p>
+    foreach (var m in Model.Recorridos)
+    { 
+        <br />
+        @Html.ActionLink(m.numero, Model.ParaderoIngresado.codigo + " " + m.numero, "Busqueda")
+    }
+}
+else
+{
+    using (Html.BeginForm())
+    {
+    @Html.ValidationSummary(true, "No se pudo ingresar la información")
+    <fieldset>
+        <legend>IngresarInformacion</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ParaderoRecorrido)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ParaderoRecorrido)
+            @Html.ValidationMessageFor(model => model.ParaderoRecorrido)
+        </div>
+
+        <table border="0" width="205">
+            <tr>
+                <td align="center"><button name="button" value="Ingresar">Ingresar</button></td>
+                <td align="center"><button name="button" value="Buscar">Buscar</button></td>
+            </tr>
+        </table>
+        
+    </fieldset>
+    }
+     <table width="100%">
+     <tr valign="top">
+        <td>
+            <p>
+            <br />Ejemplos de búsqueda
+            <ul>
+            <li>PARADERO RECORRIDO </li> <i>ej: P100 428</i>
+            <li>PARADERO</li> <i>ej: P100</i>
+            <li>RECORRIDO</li> <i>ej: 428</i>
+            </ul>
+            </p>
+        </td>
+        <td>
+            <p>
+            <br />Ejemplos de ingreso
+            <ul>
+            <li>PARADERO RECORRIDO </li> <i>ej: P100 428</i>
+            <li>PARADERO RECORRIDO ESTADO</li> <i>ej: P100 428 LL</i>
+            <li>Estados Posibles:</li> 
+            <ul>
+            <li>LL: <i>Lleno</i></li>
+            <li>V: <i>Vacio</i></li>
+            <li>PR: <i>Con Problemas</i></li>
+            <li>PA: <i>En Panne</i></li>
+            <li>D: <i>Detenido</i></li>
+            </ul>
+            </ul>
+            </p>
+        </td>
+        </tr></table>
+}

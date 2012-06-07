@@ -1,0 +1,47 @@
+﻿@model Prueba5.Models.RecorridosParadero
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Crear RecorridosParadero</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>RecorridosParadero</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ParaderoID, "Paradero")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("ParaderoID", String.Empty)
+            @Html.ValidationMessageFor(model => model.ParaderoID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RecorridoID, "Recorrido")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("RecorridoID", String.Empty)
+            @Html.ValidationMessageFor(model => model.RecorridoID)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RecorridoID, "NumeroParada")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NumeroParada)
+            @Html.ValidationMessageFor(model => model.NumeroParada)
+        </div>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,79 @@
+﻿@model Prueba5.Logica.Busqueda
+
+@{
+    ViewBag.Title = "Results";
+}
+
+<h2>Resultados</h2>
+@if (Model.ExisteResultadoFinal())
+{
+    <p>Información para <b>@Model.Codigo</b></p>
+    <table>
+        <tr>
+            <th>
+                Recorrido
+            </th>
+            <th>
+                Lejanía (en # de paraderos)
+            </th>
+            <th>
+                Estado
+            </th>
+            <th>
+                Fecha
+            </th>
+        </tr>
+        @foreach (var q in Model.ResultadoBusqueda)
+        {
+            <tr>
+                <td>@q.Recorrido</td>
+                <td>@q.Lejania</td>
+                <td>@q.NombreEstado</td>
+                <td>@q.Fecha</td>
+            </tr>
+        }
+    </table>
+}
+else if (Model.Paraderos != null)
+{
+    <h2>Lista ordenada de los paraderos por los que transita el recorrido  <b>@Model.Numero</b></h2>
+    <p>Seleccione alguno para obtener información de los buses que se acercan a su paradero</p>
+    <fieldset>
+    <table>
+    <tr><th>Listado de Paraderos</th></tr>
+    @foreach (var m in Model.Paraderos)
+    { 
+        <tr><td>@Html.ActionLink(m.codigo, Model.Numero + " " + m.codigo, "Search")</td></tr>
+    }
+    </table>
+    </fieldset>
+}
+else if (Model.Recorridos != null)
+{
+    <p>Recorridos que pasan por <b>@Model.Codigo</b></p>
+    foreach (var m in Model.Recorridos)
+    { 
+        <br />
+        @Html.ActionLink(m.numero, Model.Codigo + " " + m.numero, "Search")
+    }
+}
+else
+{
+        <h2><font color=red>Ocurrio un error procesando su búsqueda: <b>@ViewBag.query</b></font></h2>
+        <h2>Busque información sobre los próximos recorridos</h2>
+        <fieldset>
+        @using (Html.BeginForm("Restults", "Search"))
+        {
+            @Html.TextBox("query")
+            <input type="submit" value="Buscar" />
+        }
+        </fieldset>
+        <p>
+        <b>Nota</b> <br />Puede ingresar los siguientes valores
+        <ul>
+        <li>PARADERO RECORRIDO </li> <i>ej: P100 428</i>
+        <li>PARADERO</li> <i>ej: P100</i>
+        <li>RECORRIDO</li> <i>ej: 428</i>
+        </ul>
+        </p>
+}

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Prueba5.Models.Informacion>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista de Información</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            Estado
+        </th>
+        <th>
+            fecha
+        </th>
+        <th>
+            Paradero
+        </th>
+        <th>
+            Recorrido
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estado.NombreEstado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Paradero.codigo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Recorrido.numero)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

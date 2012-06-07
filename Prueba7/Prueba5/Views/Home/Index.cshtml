@@ -1,0 +1,162 @@
+﻿@model Prueba5.Models.IngresarInformacion
+
+@{
+    ViewBag.Title = "TranSapo";
+}
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://transapo.cl" data-text="visita" data-via="TranSapo" data-lang="es" data-size="large">Twittear</a>
+<script>    !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = "//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } } (document, "script", "twitter-wjs");</script>
+
+<a href="https://twitter.com/TranSapo" class="twitter-follow-button" data-show-count="false" data-lang="es" data-size="large">Seguir a TranSapo</a>
+<script>    !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = "//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } } (document, "script", "twitter-wjs");</script>
+
+<div class="fb-like" data-href="http://transapo.cl" data-send="false" data-width="450" data-show-faces="true" data-colorscheme="dark"></div>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+
+<h2>Bienvenido a TranSapo</h2>
+
+@if (Prueba5.Controllers.HomeController.Mensajes.Count>0)
+{
+    foreach (string msg in Prueba5.Controllers.HomeController.Mensajes)
+    {
+        <p><font size=3 color=green>@msg</font></p>
+    }
+    Prueba5.Controllers.HomeController.Mensajes.Clear();
+}
+
+@if (!Request.IsAuthenticated)
+{
+    <p><a href="../Account/login"><strong>Autentifícate</strong></a> para acceder a las grandes funcionalidades que te ofrecemos!</p>
+    <p>¿No tienes cuenta? <a href="../Account/register"><strong>Regístrate</strong></a>, ¡es gratis!</p>
+}
+else
+{
+    using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true,"No se pudo ingresar la información")
+        <div class="col">
+            <fieldset>
+                <legend>IngresarInformacion</legend>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.ParaderoRecorrido)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.ParaderoRecorrido)
+                    @Html.ValidationMessageFor(model => model.ParaderoRecorrido)
+                </div>
+
+                <table border="0" width="205">
+                    <tr>
+                        <td align="center"><button name="button" value="Ingresar">Ingresar</button></td>
+                        <td align="center"><button name="button" value="Buscar">Buscar</button></td>
+                    </tr>
+                </table>
+        
+            </fieldset>
+        </div>
+        <table width="100%">
+         <tr valign="top">
+            <td>
+                <p>
+                <br />Ejemplos de búsqueda
+                <ul>
+                <li>PARADERO RECORRIDO </li> <i>ej: P100 428</i>
+                <li>PARADERO</li> <i>ej: P100</i>
+                <li>RECORRIDO</li> <i>ej: 428</i>
+                </ul>
+                </p>
+            </td>
+            <td>
+                <p>
+                <br />Ejemplos de ingreso
+                <ul>
+                <li>PARADERO RECORRIDO </li> <i>ej: P100 428</i>
+                <li>PARADERO RECORRIDO ESTADO</li> <i>ej: P100 428 LL</i>
+                <li>Estados Posibles:</li> 
+                <ul>
+                <li>LL: <i>Lleno</i></li>
+                <li>V: <i>Vacio</i></li>
+                <li>PR: <i>Con Problemas</i></li>
+                <li>PA: <i>En Panne</i></li>
+                <li>D: <i>Detenido</i></li>
+                </ul>
+                </ul>
+                </p>
+            </td>
+            </tr></table>
+
+   } 
+    
+
+}
+         <table width="100%">
+         <tr valign="top">
+            <td>
+                <script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
+                    <script>
+                        new TWTR.Widget({
+                            version: 2,
+                            type: 'profile',
+                            rpp: 4,
+                            interval: 30000,
+                            width: 250,
+                            height: 300,
+                            theme: {
+                                shell: {
+                                    background: '#333333',
+                                    color: '#ffffff'
+                                },
+                                tweets: {
+                                    background: '#000000',
+                                    color: '#ffffff',
+                                    links: '#dde33b'
+                                }
+                            },
+                            features: {
+                                scrollbar: true,
+                                loop: false,
+                                live: true,
+                                behavior: 'all'
+                            }
+                        }).render().setUser('TranSapo').start();
+                </script>
+            </td>
+            <td>
+                <script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
+                    <script>
+                        new TWTR.Widget({
+                            version: 2,
+                            type: 'search',
+                            search: 'transantiago',
+                            interval: 30000,
+                            title: 'Qué sucede con el',
+                            subject: 'TranSantiago',
+                            width: 250,
+                            height: 300,
+                            theme: {
+                                shell: {
+                                    background: '#8ec1da',
+                                    color: '#ffffff'
+                                },
+                                tweets: {
+                                    background: '#ffffff',
+                                    color: '#444444',
+                                    links: '#1985b5'
+                                }
+                            },
+                            features: {
+                                scrollbar: true,
+                                loop: true,
+                                live: true,
+                                behavior: 'default'
+                            }
+                        }).render().start();
+                    </script>
+                    
+            </td>
+            </tr>
+            <tr><td align="center"><div class="fb-comments" data-href="http://transapo.cl" data-num-posts="2" data-width="470"></div></td></tr></table>

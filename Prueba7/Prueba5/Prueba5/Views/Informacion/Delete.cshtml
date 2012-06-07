@@ -1,0 +1,38 @@
+﻿@model Prueba5.Models.Informacion
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Eliminar Información</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Informacion</legend>
+
+    <div class="display-label">Estado</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Estado.NombreEstado)
+    </div>
+
+    <div class="display-label">fecha</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.fecha)
+    </div>
+
+    <div class="display-label">Paradero</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Paradero.codigo)
+    </div>
+
+    <div class="display-label">Recorrido</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Recorrido.numero)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

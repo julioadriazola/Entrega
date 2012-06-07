@@ -1,0 +1,23 @@
+﻿@model Prueba5.Models.Paradero
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Eliminar Paradero</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Paradero</legend>
+
+    <div class="display-label">codigo</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.codigo)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

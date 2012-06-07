@@ -1,0 +1,20 @@
+﻿@model Prueba5.Models.Paradero
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles Paradero</h2>
+
+<fieldset>
+    <legend>Paradero</legend>
+
+    <div class="display-label">codigo</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.codigo)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
